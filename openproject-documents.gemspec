@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.version     = OpenProject::Documents::VERSION
   s.authors     = "Finn GmbH"
   s.email       = "info@finn.de"
-  s.homepage    = "http://www.finn.de"
-  s.summary     = FIXME
-  s.description = FIXME
-  s.license     = FIXME # e.g. "MIT" or "GPLv3"
+  s.homepage    = "https://www.openproject.org/projects/documents"
+  s.summary     = "An OpenProject plugin to allow creation of documents in projects"
+  s.description = "An OpenProject plugin to allow creation of documents in projects"
+  s.license     = "GPLv3"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + %w(CHANGELOG.md)
 
