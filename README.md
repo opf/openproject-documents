@@ -67,6 +67,19 @@ Development
 To contribute, you can create pull request on the official repository at
 `https://github.com/opf/openproject-documents`
 
+### Setup
+
+To be able to run specs you need to run them from the openproject root directory.  Assuming this structure:
+
+    code
+      -> openproject
+      -> openproject-documents
+
+This is how you run your specs
+
+    cd code/openproject
+    rspec ../openproject-documents
+
 Licence
 -------
 
