@@ -80,6 +80,17 @@ This is how you run your specs
     cd code/openproject
     rspec ../openproject-documents
 
+Before you can run these tests you will need to have the link the plugin in your openproject Gemfile.plugins
+
+    gem "openproject-plugins", git: "https://github.com/opf/openproject-plugins.git", :branch => "stable"
+    gem "openproject-documents", path: "../openproject-documents" 
+
+Then you need to migrate and prepare the test database
+
+    bundle
+    rake db:migrate
+    rake db:test:load
+
 Licence
 -------
 
