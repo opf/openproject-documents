@@ -31,6 +31,6 @@
 
 module OpenProject
   module Documents
-    VERSION = "4.1.4"
+    VERSION = "4.1.5"
   end
 end
