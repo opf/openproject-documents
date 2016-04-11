@@ -1,9 +1,7 @@
+#-- encoding: UTF-8
 #-- copyright
-# OpenProject Documents Plugin
-#
-# Former OpenProject Core functionality extracted into a plugin.
-#
-# Copyright (C) 2009-2014 the OpenProject Foundation (OPF)
+# OpenProject is a project management system.
+# Copyright (C) 2012-2015 the OpenProject Foundation (OPF)
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License version 3.
@@ -29,8 +27,24 @@
 # See doc/COPYRIGHT.rdoc for more details.
 #++
 
-module OpenProject
+module BasicData
   module Documents
-    VERSION = "5.0.17"
+    class EnumerationsSeeder < Seeder
+      def seed_data!
+        category_names.each do |name|
+          DocumentCategory.create name: name
+        end
+      end
+
+      def category_names
+        category_i18n_keys.map { |key| I18n.t key }
+      end
+
+      def category_i18n_keys
+        ['documentation', 'specification', 'other'].map do |name|
+          ['enumeration', 'document_category', name].join('.')
+        end
+      end
+    end
   end
 end
