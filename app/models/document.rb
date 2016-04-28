@@ -31,7 +31,7 @@
 #++
 
 class Document < ActiveRecord::Base
-  belongs_to :project
+  belongs_to :project, touch: true
   belongs_to :category, class_name: "DocumentCategory", foreign_key: "category_id"
   acts_as_attachable delete_permission: :manage_documents
 
