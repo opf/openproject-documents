@@ -46,15 +46,15 @@ module OpenProject::Documents::Patches
             identifier = $8 || $10
             link = nil
             if project_identifier
-              project = Project.visible.find_by_identifier(project_identifier)
+              project = Project.visible.find_by(identifier: project_identifier)
             end
             if esc.nil?
               if sep == '#'
                 oid = identifier.to_i
-                document = Document.visible.find_by_id(oid)
+                document = Document.visible.find_by(id: oid)
               elsif sep == ':' && project
                 name = identifier.gsub(%r{^"(.*)"$}, "\\1")
-                document = project.documents.visible.find_by_title(name)
+                document = project.documents.visible.find_by(title: name)
               end
               if document
                 link = link_to document.title, {
