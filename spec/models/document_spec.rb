@@ -38,6 +38,12 @@ describe Document do
   let(:user)                   { FactoryGirl.create(:user)}
   let(:admin)                  { FactoryGirl.create(:admin)}
 
+  let(:mail)      do
+    mock = Object.new
+    allow(mock).to receive(:deliver_now)
+    mock
+  end
+
   context "validation" do
 
     it { is_expected.to validate_presence_of :project}
@@ -108,6 +114,17 @@ describe Document do
                                        created_on: now)
     }
 
-    it { expect(document.event_datetime).to eq(now) }
+    it { expect(document.event_datetime.to_i).to eq(now.to_i) }
+  end
+
+  it "calls the DocumentsMailer, when a new document has been added" do
+    document = FactoryGirl.build(:document)
+    # make sure, that we have actually someone to notify
+    allow(document).to receive(:recipients).and_return([user])
+    # ... and notifies are actually sent out
+    Setting.notified_events = Setting.notified_events << 'document_added'
+    expect(DocumentsMailer).to receive(:document_added).and_return(mail)
+
+    document.save
   end
 end
