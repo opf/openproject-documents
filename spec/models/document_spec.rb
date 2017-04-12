@@ -105,6 +105,11 @@ describe Document do
       expect(document.attachments).to be_empty
       expect(document.created_on).to eql document.updated_on
     end
+
+    it "should respond properly to the datetime request for acts-as-event" do
+      document = FactoryGirl.create(:document, project: project)
+      expect(document.event_options[:datetime]).to eql :created_on
+    end
   end
 
   describe "acts as event" do

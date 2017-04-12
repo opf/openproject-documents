@@ -90,6 +90,30 @@ Development
 To contribute, you can create pull request on the official repository at
 `https://github.com/opf/openproject-documents`
 
+### Setup
+
+To be able to run specs you need to run them from the openproject root directory.  Assuming this structure:
+
+    code
+      -> openproject
+      -> openproject-documents
+
+This is how you run your specs
+
+    cd code/openproject
+    rspec ../openproject-documents
+
+Before you can run these tests you will need to have the link the plugin in your openproject Gemfile.plugins
+
+    gem "openproject-plugins", git: "https://github.com/opf/openproject-plugins.git", :branch => "stable"
+    gem "openproject-documents", path: "../openproject-documents" 
+
+Then you need to migrate and prepare the test database
+
+    bundle
+    rake db:migrate
+    rake db:test:load
+
 Licence
 -------
 
