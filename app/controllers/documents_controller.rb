@@ -44,13 +44,13 @@ class DocumentsController < ApplicationController
     documents = @project.documents
     case @sort_by
     when 'date'
-      @grouped = documents.group_by {|d| d.updated_on.to_date }
+      @grouped = documents.order('title').group_by {|d| d.updated_on.to_date }
     when 'title'
-      @grouped = documents.group_by {|d| d.title.first.upcase}
+      @grouped = documents.order('title').group_by {|d| d.title.first.upcase}
     when 'author'
-      @grouped = documents.with_attachments.group_by {|d| d.attachments.last.author}
+      @grouped = documents.order('title').with_attachments.group_by {|d| d.attachments.last.author}
     else
-      @grouped = documents.includes(:category).group_by(&:category)
+      @grouped = documents.order('title').includes(:category).group_by(&:category)
     end
     render layout: false if request.xhr?
   end
