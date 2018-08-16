@@ -31,7 +31,7 @@
 
 class DocumentsMailer < UserMailer
 
-  def document_added(user, document)
+  def document_added!(user, document)
     @document = document
 
     open_project_headers 'Project' => @document.project.identifier,
@@ -39,11 +39,11 @@ class DocumentsMailer < UserMailer
 
     with_locale_for(user) do
       subject = "[#{@document.project.name}] #{t(:label_document_new)}: #{@document.title}"
-      mail to: user.mail, subject: subject
+      mail_now to: user.mail, subject: subject, template_name: 'document_added'
     end
   end
 
-  def attachments_added(user, attachments)
+  def attachments_added!(user, attachments)
     container = attachments.first.container
 
     @added_to     = "#{Document.model_name.human}: #{container.title}"
@@ -51,5 +51,4 @@ class DocumentsMailer < UserMailer
 
     super
   end
-
 end

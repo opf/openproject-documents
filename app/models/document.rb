@@ -91,7 +91,7 @@ class Document < ActiveRecord::Base
     return unless Setting.notified_events.include?('document_added')
 
     recipients.each do |user|
-      DocumentsMailer.document_added(user, self).deliver_now
+      DocumentsMailer.document_added(user, self)
     end
   end
 end
