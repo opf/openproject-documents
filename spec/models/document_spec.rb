@@ -38,12 +38,6 @@ describe Document do
   let(:user)                   { FactoryBot.create(:user)}
   let(:admin)                  { FactoryBot.create(:admin)}
 
-  let(:mail)      do
-    mock = Object.new
-    allow(mock).to receive(:deliver_now)
-    mock
-  end
-
   context "validation" do
 
     it { is_expected.to validate_presence_of :project}
@@ -121,7 +115,7 @@ describe Document do
     allow(document).to receive(:recipients).and_return([user])
     # ... and notifies are actually sent out
     Setting.notified_events = Setting.notified_events << 'document_added'
-    expect(DocumentsMailer).to receive(:document_added).and_return(mail)
+    expect(DocumentsMailer).to receive(:document_added)
 
     document.save
   end
